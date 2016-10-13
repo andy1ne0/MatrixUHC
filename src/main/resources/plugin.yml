@@ -1,0 +1,5 @@
+name: MatrixUHC
+version: ${project.version}
+main: me.andrewpetersen.matrixuhc.MatrixUHC
+authors: [TheYellowCreepz]
+description: A simple UHC plugin. 
