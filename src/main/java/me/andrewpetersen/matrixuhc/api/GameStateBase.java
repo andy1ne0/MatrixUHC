@@ -1,6 +1,6 @@
 package me.andrewpetersen.matrixuhc.api;
 
-/**
+/*
  * This project has been written by Andrew Petersen, and anyone who has contributed to the source code
  * (or where otherwise declared).
  * <p>

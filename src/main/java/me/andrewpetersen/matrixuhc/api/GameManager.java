@@ -6,8 +6,9 @@ import me.andrewpetersen.matrixuhc.MatrixUHC;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.concurrent.locks.ReentrantLock;
 
-/**
+/*
  * This project has been written by Andrew Petersen, and anyone who has contributed to the source code
  * (or where otherwise declared).
  * <p>
@@ -23,6 +24,7 @@ public abstract class GameManager extends BukkitRunnable {
     private MatrixUHC instance;
     private ArrayList<GameStateBase> gameBases;
     private int currentGameStateIndex = 0;
+    private ReentrantLock baseLock = new ReentrantLock();
     @Setter
     private boolean waiting = false;
 
@@ -38,14 +40,17 @@ public abstract class GameManager extends BukkitRunnable {
     }
 
     /**
+     * Initialize the Game Manager. This should be called in the constructor of the child class.
+     */
+    public abstract void initialize();
+
+    /**
      * Check whether or not another game state exists.
      *
      * @return True if there are more game states, false if this is not the case.
      */
     public boolean hasNextState() {
-        if (this.gameBases.size() >= this.currentGameStateIndex + 1)
-            return true;
-        return false;
+        return this.gameBases.size() >= this.currentGameStateIndex + 1;
     }
 
     /**
@@ -54,17 +59,27 @@ public abstract class GameManager extends BukkitRunnable {
      * @return The current game state base.
      */
     public GameStateBase getCurrentState() {
-        return this.getGameBases().get(this.getCurrentGameStateIndex());
+        try {
+            this.baseLock.lock();
+            return this.getGameBases().get(this.getCurrentGameStateIndex());
+        } finally {
+            this.baseLock.unlock();
+        }
     }
 
     /**
      * The method that is executed when the game should progress to the next state.
      */
     public void nextState() {
-        if (this.hasNextState()) {
-            this.currentGameStateIndex++;
-        } else {
-            throw new IllegalStateException("No more states! ");
+        try {
+            this.baseLock.lock();
+            if (this.hasNextState()) {
+                this.currentGameStateIndex++;
+            } else {
+                throw new IllegalStateException("No more states! ");
+            }
+        } finally {
+            this.baseLock.unlock();
         }
     }
 
