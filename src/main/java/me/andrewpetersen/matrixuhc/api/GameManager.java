@@ -1,5 +1,12 @@
 package me.andrewpetersen.matrixuhc.api;
 
+/*
+ * This project has been written by Andrew Petersen, and anyone who has contributed to the source code
+ * (or where otherwise declared).
+ *
+ * This code is licensed under the GPLv3 License, a copy of which can be found in the root directory.
+ */
+
 import lombok.Getter;
 import lombok.Setter;
 import me.andrewpetersen.matrixuhc.MatrixUHC;
@@ -7,13 +14,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
-
-/*
- * This project has been written by Andrew Petersen, and anyone who has contributed to the source code
- * (or where otherwise declared).
- * <p>
- * This code is licensed under the GPLv3 License, a copy of which can be found in the root directory.
- */
 
 /**
  * The class that should be extended by any game managers.

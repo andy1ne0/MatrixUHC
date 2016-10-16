@@ -15,6 +15,16 @@ import org.bukkit.entity.Player;
 public interface MatrixUhcDatabase {
 
     /**
+     * The method where any preparatory logic for the DB should be executed, and where any connections should be opened. .
+     */
+    public void initialize();
+
+    /**
+     * The method where any data cleanups should be completed, and where any open connections should be terminated.
+     */
+    public void disable();
+
+    /**
      * Increase the number of kills the player has.
      *
      * @param pl     The player whose stats are being increased.

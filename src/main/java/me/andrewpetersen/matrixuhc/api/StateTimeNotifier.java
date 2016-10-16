@@ -1,10 +1,15 @@
-package me.andrewpetersen.matrixuhc.api;/*
+package me.andrewpetersen.matrixuhc.api;
+
+/*
  * This project has been written by Andrew Petersen, and anyone who has contributed to the source code
  * (or where otherwise declared). 
  *
  * This code is licensed under the GPLv3 License, a copy of which can be found in the root directory. 
  */
 
+/**
+ * The class to be implemented if the said game state sends any messages to players that pertain to the time remaining in the state.
+ */
 public interface StateTimeNotifier {
 
     /**
