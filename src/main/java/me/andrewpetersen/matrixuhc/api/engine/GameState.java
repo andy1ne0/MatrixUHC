@@ -7,12 +7,24 @@ package me.andrewpetersen.matrixuhc.api.engine;
  * This code is licensed under the GPLv3 License, a copy of which can be found in the root directory.
  */
 
+import me.andrewpetersen.matrixuhc.states.StateLobby;
+
 /**
  * The Game State enum, used to give different sections of the plugin a simple way to store or compare  a game status.
  */
 public enum GameState {
 
-    LOBBY, LOADINGMAP, WARMUP, PLAY_NO_PVP, PLAY_PVP, DEATHMATCH_COUNTDOWN, DEATHMATCH, ENDGAME, UNDEFINED;
+    LOBBY(StateLobby.class), LOADINGMAP, WARMUP, PLAY_NO_PVP, PLAY_PVP, DEATHMATCH_COUNTDOWN, DEATHMATCH, ENDGAME, UNDEFINED;
+
+    private Class<? extends GameStateBase> clazz;
+
+    GameState(Class<? extends GameStateBase> clazz) {
+        this.clazz = clazz;
+    }
+
+    public Class<? extends GameStateBase> getBase() {
+        return this.clazz;
+    }
 
     /**
      * An enum which can dictate the join policy on a game.
