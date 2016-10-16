@@ -31,17 +31,17 @@ public class StateLobby extends GameStateBase implements StateTimeNotifier {
 
     @Override
     public void decreaseTicks(int amount) {
-        // TODO implement (using config settings) a system to prevent the decreasing of time dependent on how many players are online. 
+        // TODO implement (using config settings) a system to prevent the decreasing of time dependent on how many players are online.
     }
 
     @Override
     public void trigger() {
 
         this.repeatTime++;
-        if (this.repeatTime >= 45) {
+        if (this.repeatTime >= 45) { // TODO this needs to use the config value for the frequency. Can wait until after the config implementation is finiehsed.
             this.repeatTime = 0;
             for (Player pl : this.getInstance().getServer().getOnlinePlayers()) {
-                // TODO send the pl a message.
+                // TODO send the pl a message. Should use the string constant declared in the lang.yml file. 
             }
         }
     }
