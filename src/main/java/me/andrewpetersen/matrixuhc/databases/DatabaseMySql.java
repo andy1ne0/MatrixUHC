@@ -5,7 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import me.andrewpetersen.matrixuhc.api.MatrixUhcDatabase;
+import me.andrewpetersen.matrixuhc.api.storage.MatrixUhcDatabase;
 import org.bukkit.entity.Player;
 
 import java.sql.Connection;

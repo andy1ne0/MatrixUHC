@@ -111,3 +111,7 @@ warmup:
   # If this is set to false, latecomers will automatically be added to the spectators team.
   can_join_late: true
   alerttimes: 60-45-30-20-10-5-4-3-2-1
+  # This option determines if players are allowed to move during the warmup phase.
+  # If this is set to true, players can move. If this is set to false, players cannot move.
+  # Note that all damage is cancelled during the warmup phase.
+  movement: true

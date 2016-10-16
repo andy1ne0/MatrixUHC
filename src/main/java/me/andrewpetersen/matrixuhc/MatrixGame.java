@@ -7,8 +7,8 @@ package me.andrewpetersen.matrixuhc;
  * This code is licensed under the GPLv3 License, a copy of which can be found in the root directory.
  */
 
-import me.andrewpetersen.matrixuhc.api.GameManager;
-import me.andrewpetersen.matrixuhc.api.GameStateBase;
+import me.andrewpetersen.matrixuhc.api.engine.GameManager;
+import me.andrewpetersen.matrixuhc.api.engine.GameStateBase;
 
 import java.util.ArrayList;
 

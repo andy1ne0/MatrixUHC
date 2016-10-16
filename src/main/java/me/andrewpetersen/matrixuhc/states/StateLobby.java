@@ -11,9 +11,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import me.andrewpetersen.matrixuhc.MatrixUHC;
-import me.andrewpetersen.matrixuhc.api.GameState;
-import me.andrewpetersen.matrixuhc.api.GameStateBase;
-import me.andrewpetersen.matrixuhc.api.StateTimeNotifier;
+import me.andrewpetersen.matrixuhc.api.engine.GameState;
+import me.andrewpetersen.matrixuhc.api.engine.GameStateBase;
+import me.andrewpetersen.matrixuhc.api.engine.StateTimeNotifier;
 import org.bukkit.entity.Player;
 
 public class StateLobby extends GameStateBase implements StateTimeNotifier {
