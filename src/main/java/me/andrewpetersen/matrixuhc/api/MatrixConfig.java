@@ -29,8 +29,6 @@ import java.io.InputStreamReader;
 @Setter(value = AccessLevel.PRIVATE)
 public class MatrixConfig {
 
-    // TODO create a wrapper class, to allow for saving/reloading... http://wiki.bukkit.org/Configuration_API_Reference#Implementation_for_Reloading
-
     private FileConfiguration config;
     private File file;
     private String fileName;
