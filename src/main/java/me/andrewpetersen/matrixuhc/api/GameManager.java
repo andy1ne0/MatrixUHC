@@ -107,7 +107,7 @@ public abstract class GameManager extends BukkitRunnable {
                 return;
             }
         }
-        if (this.getCurrentState().getStateTime() == 0) {
+        if (this.getCurrentState().getStateTime() <= 0) {
             if (this.hasNextState()) {
                 this.nextState();
             } else {

@@ -12,6 +12,9 @@ version: 1
 
 # The general settings section.
 general:
+  # This option dictates the minimum number of players required for a game to start.
+  # If you would like to set a *maximum* number of players, you should do so in your server.properties file.
+  minimum_players: 6
   # This dictates the name of the UHC world. By default, this will be "world".
   uhc_world_name: world
   # This is where you can copy and paste your world generation settings.
@@ -37,11 +40,41 @@ general:
     # The below option determines if the world border is active in the Nether. Note that the Nether world border width will be 1/8th of the width specified above.
     # *Keep in mind that the width option above represents half of the overall width when considering the size.*
     border_active_in_nether: true
+  # The below section dictates the settings for team-based UHC. This can be enabled/disabled.
+  # This is disabled by default.
+  teams:
+    enabled: false
+    # This option dictates what type of teaming system is used. The possible settings are:
+    # "TWO_BIG" - which will make two big teams.
+    # "SMALL" - which will create small teams dependent on the number of players online and the other options below.
+    type: SMALL
+    # The team size option determines the maximum team sizes. Note that this is only utilized when the team game type is "SMALL".
+    maximum_team_size: 4
+    # The option below determines if players can create/join their own teams, or if the teams should be automatically determined.
+    # The two options are:
+    # "STRICT" - players have no choice over their teams.
+    # "OPEN" - players get to choose for themselves.
+    # Note that if a player selects no team, they will automatically be added to one that has room.
+    team_creation_type: OPEN
+    # The below option determines how players not in a team should be added to teams.
+    # The options are:
+    # "EVEN" - the players will be evenly distributed between the existing teams, or new ones will be formed.
+    # "FIRST" - teams will be filled as much as possible before new ones are created. Note that this can result in some large teams and many far smaller teams.
+    team_add_auto: EVEN
+    # The below option determines if players are allowed to select their team name when created. Note that this is only applicable if the "OPEN" team creation type option is active.
+    # If this is true, players can select. If this is false, players cannot select.
+    players_choose_team_name: false
+    # The below option is very similar to the above option, except it dictates if players can choose their team name based on if they have the permission "matrixuhc.nameteams".
+    # If this is true, players can select when they have permission. If this is false, players cannot select irrespective of permissions.
+    players_choose_team_name_with_permission: false
 
 # This is the settings area for the lobby state. This game state is required, and cannot be disabled.
 lobby:
   name: Lobby
   time: 45
+  # Note that alerts will not be shown if the alert time is the same as the maximum state time, i.e. an alert won't show at 45 seconds if the maximum state time is 45 seconds.
+  # THIS IS ONLY THE CASE IN THE LOBBY STATE, as the lobby state is the only state which repeats a tick time until necessary.
+  # The exception to this is dependent on what lobby alerts are enabled below, which are handled separately to the alerttimes.
   alerttimes: 30-20-10-5-4-3-2-1
   world:
     # If the world name is "_DEFAULT_", the lobby state will use the UHC world and spawn players there.
@@ -54,7 +87,6 @@ lobby:
   # An example of what this might affect: "19028 players need to join before this game may start."
   lobby_alerts: true
   frequency: 60
-  
 
 # This is the settings area for the loadingmap state. This game state is required, and cannot be disabled.
 loadingmap:
@@ -77,4 +109,5 @@ warmup:
   # If the above setting allows players to join, are they added to the game?
   # If this is set to true, any latecomers will join as players during this state.
   # If this is set to false, latecomers will automatically be added to the spectators team.
-  can_come_late: true
+  can_join_late: true
+  alerttimes: 60-45-30-20-10-5-4-3-2-1
