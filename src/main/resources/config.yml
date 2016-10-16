@@ -1,0 +1,80 @@
+# Welcome to MatrixUHC, one of the most configurable UHC plugins - by Yellow.
+# Note that all time units here are measured in *seconds*.
+# All "join_policy" variables dictate if the game can be joined at that time - the possible settings are:
+# "NO" - this state cannot be joined by *anyone*. Existing players are unaffected.
+# "PERM" - this state is joinable if the player has the "matrixuhc.join" permission.
+# "YES" - this state is joinable by all players.
+# If you would only like a *set few players* to be able to join without setting permissions, you'd be better off using a whitelist implementation.
+# All "alerttimes" components will be split by the symbol "-". These determine at what seconds a time remaining alert will be sent.
+
+# The config version - DO NOT CHANGE THIS. If you do, you'll risk your config file being wiped.
+version: 1
+
+# The general settings section.
+general:
+  # This dictates the name of the UHC world. By default, this will be "world".
+  uhc_world_name: world
+  # This is where you can copy and paste your world generation settings.
+  # You can get this from the "Customize" section when creating a single player world. The default below is a generator that *should* result in oceans being less common.
+  # MAKE SURE the JSON data is between two apostrophes (i.e. 'data'), or loading the plugin will fail!
+  # If you would like completely random generation, set the value below to "NONE" (excluding quotation marks).
+  generator_settings: '{"coordinateScale":684.412,"heightScale":684.412,"lowerLimitScale":512.0,"upperLimitScale":512.0,"depthNoiseScaleX":200.0,"depthNoiseScaleZ":200.0,"depthNoiseScaleExponent":0.5,"mainNoiseScaleX":80.0,"mainNoiseScaleY":160.0,"mainNoiseScaleZ":80.0,"baseSize":8.5,"stretchY":12.0,"biomeDepthWeight":1.0,"biomeDepthOffset":0.0,"biomeScaleWeight":1.0,"biomeScaleOffset":0.0,"seaLevel":63,"useCaves":true,"useDungeons":true,"dungeonChance":8,"useStrongholds":true,"useVillages":true,"useMineShafts":true,"useTemples":true,"useMonuments":false,"useRavines":true,"useWaterLakes":true,"waterLakeChance":34,"useLavaLakes":true,"lavaLakeChance":80,"useLavaOceans":false,"fixedBiome":-1,"biomeSize":8,"riverSize":3,"dirtSize":33,"dirtCount":10,"dirtMinHeight":0,"dirtMaxHeight":256,"gravelSize":33,"gravelCount":8,"gravelMinHeight":0,"gravelMaxHeight":256,"graniteSize":33,"graniteCount":10,"graniteMinHeight":0,"graniteMaxHeight":80,"dioriteSize":33,"dioriteCount":10,"dioriteMinHeight":0,"dioriteMaxHeight":80,"andesiteSize":33,"andesiteCount":10,"andesiteMinHeight":0,"andesiteMaxHeight":80,"coalSize":17,"coalCount":20,"coalMinHeight":0,"coalMaxHeight":128,"ironSize":9,"ironCount":20,"ironMinHeight":0,"ironMaxHeight":64,"goldSize":9,"goldCount":2,"goldMinHeight":0,"goldMaxHeight":32,"redstoneSize":8,"redstoneCount":8,"redstoneMinHeight":0,"redstoneMaxHeight":16,"diamondSize":8,"diamondCount":1,"diamondMinHeight":0,"diamondMaxHeight":16,"lapisSize":7,"lapisCount":1,"lapisCenterHeight":16,"lapisSpread":16}'
+  # This setting determines if the UHC world is deleted after every game.
+  # This is false by default, so as to not cause any unintentional damage when first using the plugin. However, it is recommended to set this to true.
+  delete_world_after_every_game: false
+  # This below section dictates the UHC world border settings.
+  uhc_world_border:
+    enabled: true
+    # The width option refers to the diameter of the border. Keep in mind that this refers to the width FROM THE CENTRE OF THE MAP.
+    # For example, a width of 2000 will result in a 4,000 x 4,000 world border.
+    width: 2000
+    # The type option determines how the border operates.
+    # The possible values are:
+    # "NATIVE" - which will use the native Minecraft 1.8 world borders.
+    # "INVISIBLE" - which will use an invisible border system. This is the default, as it is supported by all versions from 1.7 onwards.
+    # More types will be added in the future.
+    border_type: INVISIBLE
+    # The below option determines if the world border is active in the Nether. Note that the Nether world border width will be 1/8th of the width specified above.
+    # *Keep in mind that the width option above represents half of the overall width when considering the size.*
+    border_active_in_nether: true
+
+# This is the settings area for the lobby state. This game state is required, and cannot be disabled.
+lobby:
+  name: Lobby
+  time: 45
+  alerttimes: 30-20-10-5-4-3-2-1
+  world:
+    # If the world name is "_DEFAULT_", the lobby state will use the UHC world and spawn players there.
+    name: _DEFAULT_
+    spawn:
+      x: 0
+      y: 0
+      z: 0
+  # This section determines what lobby notifications are sent, and how frequently.
+  # An example of what this might affect: "19028 players need to join before this game may start."
+  lobby_alerts: true
+  frequency: 60
+  
+
+# This is the settings area for the loadingmap state. This game state is required, and cannot be disabled.
+loadingmap:
+  name: Loading Map
+  # The below variable accepts wither "ALL" or "GRADUAL" as the options.
+  # "ALL" means that all players will be teleported at once.
+  # "GRADUAL" means that all players will be teleported one-at-a-time. This is better for server performance.
+  # Be warned that teleporting every player at once is likely to crash your server!
+  tp_option: GRADUAL
+  # The below option is only used if the tp_option variable is set to gradual - it will dictate how often each extra player is teleported.
+  tp_delay: 5
+
+# This is the settings area for the warmup state. This game state *can* be disabled, though it is highly recommended to leave it enabled in case the world hasn't yet loaded for some players.
+warmup:
+  name: Warmup
+  enabled: true
+  time: 60
+  # This can be set to three different values - all of which can be seen at the top of this file.
+  join_policy: YES
+  # If the above setting allows players to join, are they added to the game?
+  # If this is set to true, any latecomers will join as players during this state.
+  # If this is set to false, latecomers will automatically be added to the spectators team.
+  can_come_late: true

@@ -18,7 +18,18 @@ public enum GameState {
      * An enum which can dictate the join policy on a game.
      */
     public enum JoinStatus {
-        NOT_JOINABLE, JOINABLE_WITH_PERMISSION, JOINABLE
+        NOT_JOINABLE("NO"), JOINABLE_WITH_PERMISSION("PERM"), JOINABLE("YES");
+
+        private String literal;
+
+        JoinStatus(String literal) {
+            this.literal = literal;
+        }
+
+        public String toString() {
+            return this.literal;
+        }
+
     }
 
 }
