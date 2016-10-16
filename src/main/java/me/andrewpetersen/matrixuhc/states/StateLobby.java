@@ -30,6 +30,11 @@ public class StateLobby extends GameStateBase implements StateTimeNotifier {
     }
 
     @Override
+    public void decreaseTicks(int amount) {
+        // TODO implement (using config settings) a system to prevent the decreasing of time dependent on how many players are online. 
+    }
+
+    @Override
     public void trigger() {
 
         this.repeatTime++;

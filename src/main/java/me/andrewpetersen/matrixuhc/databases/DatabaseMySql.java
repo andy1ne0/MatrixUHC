@@ -95,7 +95,7 @@ public class DatabaseMySql implements MatrixUhcDatabase { // TODO finish the imp
 
     @Override
     public void increaseLosses(Player pl, int amount) {
-        
+
     }
 
     @Override
