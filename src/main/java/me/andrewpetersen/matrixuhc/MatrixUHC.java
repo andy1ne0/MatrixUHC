@@ -24,7 +24,7 @@ public final class MatrixUHC extends JavaPlugin {
     private boolean verbose = false;
 
     @Getter
-    @Setter(value = AccessLevel.PRIVATE)
+    @Setter(AccessLevel.PRIVATE)
     private MatrixGame gameEngine;
 
     /**

@@ -19,7 +19,7 @@ import org.bukkit.entity.Player;
 public class StateLobby extends GameStateBase implements StateTimeNotifier {
 
     @Getter
-    @Setter(value = AccessLevel.PRIVATE)
+    @Setter(AccessLevel.PRIVATE)
     private MatrixUHC instance;
 
     private int repeatTime = 0;

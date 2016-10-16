@@ -15,7 +15,8 @@ import org.bukkit.entity.Player;
 public interface MatrixUhcDatabase {
 
     /**
-     * The method where any preparatory logic for the DB should be executed, and where any connections should be opened. .
+     * The method where any preparatory logic for the DB should be executed.
+     * The connection should be opened in the constructor, so credentials can be handled without needing to assign any global variables (and thus preventing malicious Java code from reading the credentials).
      */
     public void initialize();
 
@@ -71,6 +72,22 @@ public interface MatrixUhcDatabase {
      * @param callback The callback for once the information is collected.
      */
     public void getWins(Player pl, DatabaseCallback callback);
+
+    /**
+     * Increase the number of losses the player has.
+     *
+     * @param pl     The player whose stats are being increased.
+     * @param amount The number of losses to add to the existing number.
+     */
+    public void increaseLosses(Player pl, int amount);
+
+    /**
+     * Get the number of losses the player has.
+     *
+     * @param pl       The player to collect data from.
+     * @param callback The callback for once the information is collected.
+     */
+    public void getLosses(Player pl, DatabaseCallback callback);
 
     /**
      * Get the number of deaths the player has.

@@ -26,7 +26,7 @@ import java.io.InputStreamReader;
  * This is a utility class for working with configuration files.
  */
 @Getter
-@Setter(value = AccessLevel.PRIVATE)
+@Setter(AccessLevel.PRIVATE)
 public class MatrixConfig {
 
     private FileConfiguration config;
