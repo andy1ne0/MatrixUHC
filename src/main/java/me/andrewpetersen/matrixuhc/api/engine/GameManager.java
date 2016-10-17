@@ -69,6 +69,7 @@ public abstract class GameManager extends BukkitRunnable {
 
     /**
      * The method that is executed when the game should progress to the next state.
+     * @throws IllegalStateException If there is no next state.
      */
     public void nextState() {
         try {
@@ -80,6 +81,20 @@ public abstract class GameManager extends BukkitRunnable {
             }
         } finally {
             this.baseLock.unlock();
+        }
+    }
+
+    /**
+     * Get the next game state base. Make sure to check if there is one first.
+     *
+     * @return The next game state, if possible.
+     * @throws IllegalStateException If there is no next state.
+     */
+    public GameStateBase getNextState() {
+        if (this.hasNextState()) {
+            return this.getGameBases().get(this.getCurrentGameStateIndex() + 1);
+        } else {
+            throw new IllegalStateException("There is no next state to get! ");
         }
     }
 

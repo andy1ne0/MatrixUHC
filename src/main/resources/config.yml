@@ -98,8 +98,11 @@ loadingmap:
   tp_option: GRADUAL
   # The below option is only used if the tp_option variable is set to gradual - it will dictate how often each extra player is teleported.
   tp_delay: 5
+  # This option determines if the game chat is enabled during this state.
+  chat_enabled: true
 
 # This is the settings area for the warmup state. This game state *can* be disabled, though it is highly recommended to leave it enabled in case the world hasn't yet loaded for some players.
+# Note that PvP is always disabled during this state.
 warmup:
   name: Warmup
   enabled: true
@@ -115,3 +118,8 @@ warmup:
   # If this is set to true, players can move. If this is set to false, players cannot move.
   # Note that all damage is cancelled during the warmup phase.
   movement: true
+  # This option determines if players can place and break blocks during this state.
+  # Note that if you simply want a peace period, you should instead configure the graceful period state directly below.
+  block_ops_enabled: false
+  # This option determines if the game chat is enabled during this state.
+  chat_enabled: true

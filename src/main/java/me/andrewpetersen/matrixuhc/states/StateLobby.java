@@ -16,14 +16,25 @@ import me.andrewpetersen.matrixuhc.api.engine.GameStateBase;
 import me.andrewpetersen.matrixuhc.api.engine.StateTimeNotifier;
 import org.bukkit.entity.Player;
 
+/**
+ * The Lobby state implementation.
+ */
+@Getter
 public class StateLobby extends GameStateBase implements StateTimeNotifier {
 
-    @Getter
     @Setter(AccessLevel.PRIVATE)
     private MatrixUHC instance;
 
     private int repeatTime = 0;
 
+    /**
+     * The default constructor.
+     *
+     * @param instance The MatrixUHC plugin instance.
+     * @param name     The public name of this state.
+     * @param time     The time this state should run for.
+     * @param chat     Whether chat is enabled or disabled.
+     */
     public StateLobby(MatrixUHC instance, String name, int time, boolean chat) {
         super(name, GameState.LOBBY, GameState.JoinStatus.JOINABLE, false, chat, false, time);
         this.setInstance(instance);
@@ -49,6 +60,6 @@ public class StateLobby extends GameStateBase implements StateTimeNotifier {
     @Override
     public String getTimeWrapperString(String timeUnit, int time) {
 
-        return null;
+        return null; // TODO sort out notif times.
     }
 }
