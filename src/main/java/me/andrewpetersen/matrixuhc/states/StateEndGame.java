@@ -46,6 +46,6 @@ public class StateEndGame extends GameStateBase implements StateTimeNotifier {
 
     @Override
     public String getTimeWrapperString(String timeUnit, int time) {
-        return null; // TODO complete implementation. 
+        return null; // TODO complete implementation.
     }
 }

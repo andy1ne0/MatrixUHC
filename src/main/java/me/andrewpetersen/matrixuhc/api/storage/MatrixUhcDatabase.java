@@ -8,6 +8,8 @@ package me.andrewpetersen.matrixuhc.api.storage;
 
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
+
 /**
  * This is an interface that the different database types should implement, so as to reduce coupling between the server and the database type.
  * All operations should be completed asynchronously, thus the {@link DatabaseCallback} class has been provided.
@@ -113,6 +115,14 @@ public interface MatrixUhcDatabase {
      * @param callback The callback for once the information is collected.
      */
     public void trySetKillstreak(Player pl, int amount, DatabaseCallback callback);
+
+    /**
+     * The method called when the database should check for/update a changed player name.
+     *
+     * @param uuid The UUID of the player.
+     * @param name The IGN of the player - this could be different to what is in the database.
+     */
+    public void updatePlayerData(UUID uuid, String name);
 
     /**
      * This class to be used when a database operation needs to return a value.

@@ -1,14 +1,16 @@
 package me.andrewpetersen.matrixuhc.databases;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import me.andrewpetersen.matrixuhc.MatrixUHC;
 import me.andrewpetersen.matrixuhc.api.storage.MatrixUhcDatabase;
 import org.bukkit.entity.Player;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.UUID;
 
@@ -20,40 +22,41 @@ import java.util.UUID;
  */
 
 /**
- * A MySql MatrixDatabase implementation.
+ * The SQlite implementation of MatrixDatabase.
  */
-public class DatabaseMySql implements MatrixUhcDatabase { // TODO finish the implementation.
+@Getter
+@Setter(AccessLevel.PRIVATE)
+public class DatabaseSqlite implements MatrixUhcDatabase {
 
-    @Getter(AccessLevel.PRIVATE)
-    @Setter(AccessLevel.PRIVATE)
-    HikariDataSource dataSource;
+    private Connection connection;
+
+    private MatrixUHC instance;
 
     /**
-     * The constructor for the MySql database implementation.
-     *
-     * @param url      The URL for the SQL connection, for example: "jdbc:mysql://localhost:3306". Note that trailing slashes are automatically removed.
-     * @param dbName   The name of the Database, to be appended to the connection URL.
-     * @param username The connection username.
-     * @param password The connection password.
+     * The default constructor for the SQlite MatrixDatabase implementation.
      */
-    public DatabaseMySql(String url, String dbName, String username, String password) {
-        HikariConfig config = new HikariConfig();
-        if (url.endsWith("/")) {
-            url = url.substring(0, url.length() - 1);
+    public DatabaseSqlite(MatrixUHC instance) {
+
+        this.setInstance(instance);
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            File dbFile = new File(this.getInstance().getDataFolder(), "storage.db");
+            File dir = this.getInstance().getDataFolder();
+
+            if (!dir.exists() && !dir.mkdirs()) {
+                throw new IOException("Could not create the data folder! ");
+            }
+
+            if (!dbFile.exists() && !dbFile.createNewFile()) {
+                throw new IOException("The database file could not be created! ");
+            }
+
+            this.setConnection(DriverManager.getConnection("jdbc:sqlite:" + dbFile));
+
+        } catch (ClassNotFoundException | IOException | SQLException e) {
+            e.printStackTrace();
         }
-        config.setJdbcUrl(url + "/" + dbName);
-        config.setUsername(username);
-        config.setPassword(password);
-        this.setDataSource(new HikariDataSource(config));
-    }
-
-    /**
-     * This is simply a wrapper for the {@link HikariDataSource#getConnection()} method.
-     *
-     * @return The database connection.
-     */
-    private Connection getConnection() throws SQLException {
-        return this.getDataSource().getConnection();
     }
 
     @Override
@@ -63,7 +66,11 @@ public class DatabaseMySql implements MatrixUhcDatabase { // TODO finish the imp
 
     @Override
     public void disable() {
-        this.getDataSource().close();
+        try {
+            this.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
