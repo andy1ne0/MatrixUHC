@@ -21,7 +21,9 @@ import java.util.logging.Level;
  */
 @Getter
 public final class MatrixUHC extends JavaPlugin {
-    
+
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
     private static MatrixUHC instance;
 
     @Setter
@@ -36,18 +38,9 @@ public final class MatrixUHC extends JavaPlugin {
     @Setter(AccessLevel.PRIVATE)
     private MatrixConfig languageFile;
 
-    /**
-     * Get the primary plugin instance. This should be avoided - preferably use dependency injection.
-     *
-     * @return The MatrixUHC instance.
-     */
-    public static MatrixUHC getInstance() {
-        return instance;
-    }
-
     @Override
     public void onEnable() {
-        MatrixUHC.instance = this;
+        MatrixUHC.setInstance(this);
         try {
             this.setSettingsConfig(MatrixConfig.createConfiguration("config.yml"));
             this.setLanguageFile(MatrixConfig.createConfiguration("lang.yml"));
