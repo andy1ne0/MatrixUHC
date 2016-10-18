@@ -24,10 +24,9 @@ public enum OptionsConfig {
     private String literalLocation;
 
     /**
-     * The constructor.
+     * The constructor. This enum should be directly usable in the {@link org.bukkit.configuration.file.FileConfiguration#get(String)} methods.
      *
      * @param literalLocation The location in the config file this represents.
-     *                        This should be directly usable in the {@link org.bukkit.configuration.file.FileConfiguration#get(String)} methods.
      */
     OptionsConfig(String literalLocation) {
         this.literalLocation = literalLocation;
