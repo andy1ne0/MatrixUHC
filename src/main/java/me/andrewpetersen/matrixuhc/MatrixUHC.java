@@ -10,22 +10,31 @@ package me.andrewpetersen.matrixuhc;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import me.andrewpetersen.matrixuhc.api.storage.MatrixConfig;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.IOException;
+import java.util.logging.Level;
 
 /**
  * The main plugin class.
  */
+@Getter
 public final class MatrixUHC extends JavaPlugin {
-
+    
     private static MatrixUHC instance;
 
-    @Getter
     @Setter
     private boolean verbose = false;
 
-    @Getter
     @Setter(AccessLevel.PRIVATE)
     private MatrixGame gameEngine;
+
+    @Setter(AccessLevel.PRIVATE)
+    private MatrixConfig settingsConfig;
+
+    @Setter(AccessLevel.PRIVATE)
+    private MatrixConfig languageFile;
 
     /**
      * Get the primary plugin instance. This should be avoided - preferably use dependency injection.
@@ -39,6 +48,12 @@ public final class MatrixUHC extends JavaPlugin {
     @Override
     public void onEnable() {
         MatrixUHC.instance = this;
+        try {
+            this.setSettingsConfig(MatrixConfig.createConfiguration("config.yml"));
+            this.setLanguageFile(MatrixConfig.createConfiguration("lang.yml"));
+        } catch (IOException e) {
+            this.getServer().getLogger().log(Level.SEVERE, Strings.VERBOSE_CONSOLE_PREFIX + "Could not create the config and/or language file! Aborting. ");
+        }
         this.setGameEngine(new MatrixGame(this, null)); // TODO shouldn't be null! Don't forget later on.
     }
 
