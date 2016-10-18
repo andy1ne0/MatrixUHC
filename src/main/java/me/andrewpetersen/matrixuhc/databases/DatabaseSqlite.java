@@ -52,7 +52,7 @@ public class DatabaseSqlite implements MatrixUhcDatabase {
                 throw new IOException("The database file could not be created! ");
             }
 
-            this.setConnection(DriverManager.getConnection("jdbc:sqlite:" + dbFile));
+            this.setConnection(DriverManager.getConnection("jdbc:sqlite:" + dbFile + "?autoReconnect=true"));
 
         } catch (ClassNotFoundException | IOException | SQLException e) {
             e.printStackTrace();
